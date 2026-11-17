@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ماموریت فضایی مطالعات اجتماعی نهم</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
+:root{--bg:#070b1b;--panel:#111a35;--panel2:#172344;--cyan:#54e7ff;--purple:#a78bfa;--pink:#ff75c3;--gold:#ffd166;--text:#f3f5ff;--muted:#aab5d4;--good:#48e0a4;--bad:#ff7185}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:'Vazirmatn',Tahoma,sans-serif;color:var(--text);background:radial-gradient(ellipse at 15% 15%,#1a2857 0,transparent 38%),radial-gradient(ellipse at 85% 75%,#30164c 0,transparent 35%),linear-gradient(145deg,#050817,#0b1026 55%,#100b24);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.65;background-image:radial-gradient(2px 2px at 10% 20%,#fff 50%,transparent 55%),radial-gradient(1px 1px at 70% 15%,#fff 50%,transparent 55%),radial-gradient(2px 2px at 45% 72%,#9deaff 50%,transparent 55%),radial-gradient(1px 1px at 88% 48%,#fff 50%,transparent 55%),radial-gradient(1px 1px at 25% 88%,#fff 50%,transparent 55%),radial-gradient(2px 2px at 62% 39%,#d6b5ff 50%,transparent 55%);background-size:340px 300px}
+.wrap{width:min(900px,92%);margin:auto;position:relative;padding:24px 0 18px;min-height:100vh;display:flex;flex-direction:column}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:25px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.4px}.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#5deaff,#9a79ff);color:#091127;font-size:23px;box-shadow:0 0 24px #5deaff55}
+.creator{font-size:12px;color:var(--muted);border:1px solid #ffffff20;padding:8px 13px;border-radius:30px;background:#ffffff08}
+main{flex:1;display:grid;place-items:center}
+.screen{display:none;width:100%;animation:rise .45s ease}.screen.active{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.card{background:linear-gradient(145deg,#141e3cdd,#0e1630ee);border:1px solid #9bb6ff25;border-radius:27px;padding:clamp(22px,5vw,42px);box-shadow:0 25px 80px #0008,inset 0 1px #ffffff12;backdrop-filter:blur(12px)}
+.hero{text-align:center;max-width:720px;margin:auto}
+.planet{font-size:70px;filter:drop-shadow(0 0 22px #8b7cff88);margin-bottom:5px}
+.eyebrow{color:var(--cyan);font-size:13px;font-weight:700;letter-spacing:1px}
+h1{font-size:clamp(28px,5vw,46px);line-height:1.45;margin:8px 0 12px;font-weight:900}
+.gradient{background:linear-gradient(90deg,var(--cyan),#b8a1ff,var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.desc{color:var(--muted);line-height:2;margin:0 auto 25px;max-width:560px}
+.stats{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:22px 0 27px}
+.stat{background:#ffffff09;border:1px solid #ffffff16;padding:10px 16px;border-radius:15px;color:#dce5ff;font-size:13px}
+button{font:inherit;cursor:pointer;border:0;transition:.2s}
+.primary{background:linear-gradient(100deg,#4de4f6,#a18aff);color:#091127;font-weight:900;padding:14px 34px;border-radius:15px;box-shadow:0 8px 28px #66cfff33}
+.primary:hover{transform:translateY(-2px);box-shadow:0 12px 34px #66cfff55}
+.small-note{font-size:12px;color:var(--muted);margin-top:17px}
+.quiz-card{max-width:760px;margin:auto}
+.topline{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:17px;color:var(--muted);font-size:13px}
+.score-pill{background:#ffd16618;color:var(--gold);padding:7px 13px;border-radius:30px;border:1px solid #ffd16633;font-weight:800}
+.progress{height:8px;border-radius:20px;background:#ffffff13;overflow:hidden;margin-bottom:27px}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));border-radius:20px;transition:width .35s}
+.topic{color:var(--cyan);font-size:12px;font-weight:700;margin-bottom:8px}
+.question{font-size:clamp(19px,3vw,25px);line-height:1.9;margin:0 0 22px}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.answer{background:#ffffff09;border:1px solid #ffffff20;color:var(--text);padding:15px 16px;border-radius:15px;text-align:right;line-height:1.8;min-height:66px}
+.answer:hover:not(:disabled){border-color:var(--cyan);background:#54e7ff12;transform:translateY(-2px)}
+.answer:disabled{cursor:default;opacity:1}
+.answer.correct{border-color:var(--good);background:#48e0a41c;color:#baffdf}
+.answer.wrong{border-color:var(--bad);background:#ff71851c;color:#ffc2cc}
+.answer .letter{display:inline-grid;place-items:center;width:27px;height:27px;border-radius:9px;background:#ffffff13;margin-left:9px;font-size:12px;color:var(--cyan);font-weight:800}
+.feedback{margin-top:16px;padding:13px 16px;border-radius:13px;background:#ffffff0b;color:var(--muted);line-height:1.8;display:none;font-size:14px}
+.feedback.show{display:block}.feedback.good{border-right:3px solid var(--good)}.feedback.bad{border-right:3px solid var(--bad)}
+.bottom{display:flex;justify-content:space-between;align-items:center;margin-top:20px;gap:12px}
+.hint{color:var(--muted);font-size:12px}.next{padding:11px 24px;border-radius:12px;background:var(--purple);color:#100d27;font-weight:800;display:none}.next.show{display:block}
+.result{text-align:center;max-width:700px;margin:auto}
+.medal{font-size:76px;margin:4px 0 0;filter:drop-shadow(0 0 20px #ffd16666)}
+.result h2{font-size:clamp(27px,5vw,39px);margin:4px 0}
+.bigscore{font-size:54px;font-weight:900;color:var(--gold);line-height:1.3}
+.rank{display:inline-block;padding:10px 22px;border-radius:30px;background:linear-gradient(90deg,#54e7ff22,#a78bfa33);border:1px solid #a78bfa66;color:#d9d0ff;font-size:20px;font-weight:900;margin:12px 0}
+.result p{color:var(--muted);line-height:2}
+.result-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:22px}
+.secondary{background:#ffffff12;border:1px solid #ffffff24;color:var(--text);padding:12px 22px;border-radius:13px}
+footer{text-align:center;color:#8792b5;font-size:11px;padding:20px 0 5px}
+@media(max-width:600px){header{align-items:flex-start}.brand{font-size:13px}.creator{font-size:10px}.answers{grid-template-columns:1fr}.card{border-radius:21px}.bottom{align-items:flex-end}.hint{max-width:55%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand"><span class="logo">✦</span><span>آکادمی کهکشانی</span></div>
+  <div class="creator">سازنده: امیررضا گودرزی</div>
+</header>
+<main>
+<section class="screen active" id="start">
+ <div class="card hero">
+  <div class="planet">🪐</div>
+  <div class="eyebrow">SPACE MISSION • پایه نهم</div>
+  <h1>ماموریت فضایی <span class="gradient">مطالعات اجتماعی</span></h1>
+  <p class="desc">برای تبدیل‌شدن به قهرمان کهکشان، به ۱۰ پرسش چهارگزینه‌ای پاسخ بده. هر پاسخ درست ۱۰ امتیاز دارد؛ آماده‌ای دانش خودت را در مدار امتحان قرار بدهی؟</p>
+  <div class="stats"><div class="stat">🚀 ۱۰ پرسش</div><div class="stat">⭐ هر پاسخ درست: ۱۰ امتیاز</div><div class="stat">🏆 حداکثر: ۱۰۰ امتیاز</div></div>
+  <button class="primary" onclick="startGame()">شروع ماموریت فضایی ←</button>
+  <div class="small-note">دانش، سوخت سفینه توست!</div>
+ </div>
+</section>
+<section class="screen" id="game">
+ <div class="card quiz-card">
+  <div class="topline"><span id="counter">پرسش ۱ از ۱۰</span><span class="score-pill">⭐ امتیاز: <b id="score">۰</b></span></div>
+  <div class="progress"><div class="progress-fill" id="progress"></div></div>
+  <div class="topic" id="topic"></div>
+  <h2 class="question" id="question"></h2>
+  <div class="answers" id="answers"></div>
+  <div class="feedback" id="feedback" aria-live="polite"></div>
+  <div class="bottom"><span class="hint" id="hint">یک گزینه را انتخاب کن.</span><button class="next" id="next" onclick="nextQuestion()">پرسش بعدی ←</button></div>
+ </div>
+</section>
+<section class="screen" id="result">
+ <div class="card result">
+  <div class="medal" id="medal">🏆</div>
+  <div class="eyebrow">MISSION COMPLETED</div>
+  <h2>ماموریت به پایان رسید!</h2>
+  <div class="bigscore"><span id="finalScore">۰</span><small style="font-size:20px"> / ۱۰۰</small></div>
+  <div class="rank" id="rank">کاوشگر کهکشان</div>
+  <p id="message"></p>
+  <div class="stats"><div class="stat">✅ پاسخ درست: <b id="rightCount">۰</b></div><div class="stat">❌ پاسخ نادرست: <b id="wrongCount">۰</b></div></div>
+  <div class="result-actions"><button class="primary" onclick="startGame()">🚀 تلاش دوباره</button><button class="secondary" onclick="showScreen('start')">بازگشت به خانه</button></div>
+ </div>
+</section>
+</main>
+<footer>طراحی و ساخت: امیررضا گودرزی • ماموریت فضایی مطالعات اجتماعی نهم</footer>
+</div>
+<script>
+const questions = [
+ {topic:"جغرافیا و محیط زندگی",q:"کدام گزینه یکی از عوامل اصلی تنوع آب‌وهوایی ایران است؟",a:["گستردگی کشور و تفاوت ارتفاع","یکسان‌بودن ارتفاع همه مناطق","قرارگرفتن تمام کشور کنار دریا","نبود رشته‌کوه در ایران"],c:0,e:"گستردگی ایران، اختلاف ارتفاع و دوری یا نزدیکی به دریاها در تنوع آب‌وهوا نقش دارند."},
+ {topic:"جغرافیا و محیط زندگی",q:"خط استوا زمین را به کدام دو نیم‌کره تقسیم می‌کند؟",a:["شرقی و غربی","شمالی و جنوبی","خشکی و آبی","گرم و سرد"],c:1,e:"خط استوا زمین را به نیم‌کره شمالی و نیم‌کره جنوبی تقسیم می‌کند."},
+ {topic:"جمعیت و منابع",q:"به تعداد افرادی که در واحد سطح زندگی می‌کنند چه می‌گویند؟",a:["رشد طبیعی","مهاجرت","تراکم جمعیت","امید به زندگی"],c:2,e:"تراکم جمعیت از تقسیم جمعیت یک ناحیه بر مساحت آن به دست می‌آید."},
+ {topic:"تاریخ ایران",q:"کدام سلسله در دوره‌ای از تاریخ ایران پایتخت خود را در اصفهان قرار داد؟",a:["صفویان","هخامنشیان","اشکانیان","سامانیان"],c:0,e:"اصفهان در دوره صفوی، به‌ویژه زمان شاه‌عباس اول، پایتخت ایران بود."},
+ {topic:"تاریخ ایران",q:"جنبش مشروطه در ایران با چه هدف مهمی شکل گرفت؟",a:["افزایش قدرت مطلقه شاه","تشکیل مجلس و محدودشدن قدرت حکومت","حذف همه قوانین","انتقال پایتخت به تبریز"],c:1,e:"از هدف‌های مهم مشروطه، ایجاد مجلس و قانون‌مندشدن اداره کشور بود."},
+ {topic:"حکومت و قانون",q:"قانون اساسی چه چیزی را مشخص می‌کند؟",a:["فقط قیمت کالاها را","فقط برنامه مدرسه‌ها را","ساختار حکومت و حقوق و وظایف اساسی مردم و نهادها را","مرز همه کشورهای جهان را"],c:2,e:"قانون اساسی چارچوب کلی حکومت و حقوق و مسئولیت‌های اساسی را تعیین می‌کند."},
+ {topic:"شهروندی",q:"کدام مورد نمونه‌ای از مسئولیت شهروندی است؟",a:["رعایت‌نکردن مقررات عمومی","حفظ اموال عمومی و رعایت قانون","آسیب‌زدن به محیط‌زیست","نادیده‌گرفتن حقوق دیگران"],c:1,e:"حفظ اموال عمومی، رعایت قانون و احترام به حقوق دیگران از مسئولیت‌های شهروندی است."},
+ {topic:"اقتصاد و تولید",q:"کدام گزینه نمونه‌ای از فعالیت بخش کشاورزی است؟",a:["ساخت خودرو","ارائه خدمات بانکی","کشت گندم","طراحی نرم‌افزار"],c:2,e:"کشت محصولات زراعی مانند گندم از فعالیت‌های بخش کشاورزی است."},
+ {topic:"ارتباطات و جهان",q:"مهم‌ترین نقش سازمان ملل متحد چیست؟",a:["اداره مستقیم همه کشورها","کمک به حفظ صلح و همکاری میان کشورها","تعیین رئیس‌جمهور کشورها","یکسان‌کردن زبان همه مردم"],c:1,e:"سازمان ملل متحد برای همکاری بین‌المللی و کمک به حفظ صلح و امنیت ایجاد شده است."},
+ {topic:"میراث فرهنگی",q:"چرا حفاظت از آثار تاریخی اهمیت دارد؟",a:["چون مانع شناخت گذشته می‌شود","چون فقط ارزش تزئینی دارند","چون بخشی از هویت و میراث فرهنگی جامعه‌اند","چون باید جای همه ساختمان‌های جدید را بگیرند"],c:2,e:"آثار تاریخی بخشی از هویت و میراث فرهنگی‌اند و به شناخت گذشته کمک می‌کنند."}
+];
+let order=[],index=0,score=0,rights=0,locked=false;
+const fa=n=>String(n).replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
+function startGame(){order=[...questions.keys()].sort(()=>Math.random()-.5);index=0;score=0;rights=0;document.getElementById('score').textContent=fa(score);showScreen('game');renderQuestion()}
+function renderQuestion(){
+ locked=false;const q=questions[order[index]];
+ document.getElementById('counter').textContent=`پرسش ${fa(index+1)} از ${fa(questions.length)}`;
+ document.getElementById('progress').style.width=(index/questions.length*100)+'%';
+ document.getElementById('topic').textContent='✦ '+q.topic;
+ document.getElementById('question').textContent=q.q;
+ document.getElementById('feedback').className='feedback';document.getElementById('feedback').textContent='';
+ document.getElementById('hint').textContent='یک گزینه را انتخاب کن.';
+ document.getElementById('next').classList.remove('show');
+ const letters=['الف','ب','ج','د'];const area=document.getElementById('answers');area.innerHTML='';
+ q.a.forEach((answer,i)=>{const b=document.createElement('button');b.className='answer';b.innerHTML=`<span class="letter">${letters[i]}</span>${answer}`;b.onclick=()=>choose(i);area.appendChild(b)});
+}
+function choose(choice){
+ if(locked)return;locked=true;const q=questions[order[index]],buttons=[...document.querySelectorAll('.answer')],fb=document.getElementById('feedback');
+ buttons.forEach((b,i)=>{b.disabled=true;if(i===q.c)b.classList.add('correct');else if(i===choice)b.classList.add('wrong')});
+ if(choice===q.c){score+=10;rights++;fb.textContent='آفرین! پاسخ درست است. ⭐ '+q.e;fb.classList.add('good')}
+ else{fb.textContent='این بار درست نبود. پاسخ صحیح مشخص شده است. '+q.e;fb.classList.add('bad')}
+ fb.classList.add('show');document.getElementById('score').textContent=fa(score);
+ document.getElementById('hint').textContent=choice===q.c?'۱۰ امتیاز به دست آوردی!':'برای پرسش بعدی آماده شو.';
+ document.getElementById('next').textContent=index===questions.length-1?'دیدن نتیجه 🏆':'پرسش بعدی ←';document.getElementById('next').classList.add('show');
+}
+function nextQuestion(){if(!locked)return;index++;if(index<questions.length)renderQuestion();else finishGame()}
+function finishGame(){
+ document.getElementById('progress').style.width='100%';
+ let rank,medal,msg;
+ if(score>=90){rank='فرمانده کهکشان';medal='👨‍🚀';msg='درخشان بود! تو با دانش و دقت، فرمانده این ماموریت شدی.'}
+ else if(score>=80){rank='فضانورد نابغه';medal='🚀';msg='عالی بود! تو آماده سفر به دوردست‌ترین نقطه‌های دانش هستی.'}
+ else if(score>=60){rank='مریخ‌نورد';medal='🔴';msg='آفرین! سطح دانشت خیلی خوب است؛ به مسیرت ادامه بده.'}
+ else if(score>=40){rank='ماه‌نورد';medal='🌙';msg='خوب پیش رفتی! با مرور درس‌ها می‌توانی به سیاره‌های دورتر برسی.'}
+ else if(score>=20){rank='ستاره‌شناس';medal='🔭';msg='شروع خوبی است. کمی بیشتر تمرین کن تا امتیازت بالاتر برود.'}
+ else{rank='کاوشگر تازه‌کار';medal='🛰️';msg='هر کاوشگر بزرگی از قدم اول شروع می‌کند؛ دوباره تلاش کن و یاد بگیر.'}
+ document.getElementById('finalScore').textContent=fa(score);document.getElementById('rank').textContent=rank;document.getElementById('medal').textContent=medal;document.getElementById('message').textContent=msg;document.getElementById('rightCount').textContent=fa(rights);document.getElementById('wrongCount').textContent=fa(10-rights);showScreen('result')
+}
+</script>
+</body>
+</html>
